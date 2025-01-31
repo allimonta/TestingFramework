@@ -3,7 +3,6 @@ package org.example.tests;
 import org.example.bases.BaseTest;
 import org.example.pages.*;
 import org.example.utils.Constants;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

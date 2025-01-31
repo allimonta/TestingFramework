@@ -2,10 +2,6 @@ package org.example.utils;
 
 public class Functions {
 
-    public static int convertToNumber(String numberString) {
-        return Integer.parseInt(numberString);
-    }
-
     public static double extractNumber(String text) {
         String number = text.replaceAll("[^\\d.]", "").trim();
         return Double.parseDouble(number);
