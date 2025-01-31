@@ -19,29 +19,29 @@ public class Product extends BasePageObjects {
     }
 
     public void ProductDetailsScreenCompleteness(){
-        WebElement title = driver.findElement(productTitle);
-        WebElement image = driver.findElement(productImage);
-        WebElement description = driver.findElement(productDescription);
-        WebElement price = driver.findElement(productPrice);
-        Assert.assertTrue(title.isDisplayed());
-        Assert.assertTrue(image.isDisplayed());
-        Assert.assertTrue(description.isDisplayed());
-        Assert.assertTrue(price.isDisplayed());
+        WebElement title = GetElement(productTitle);
+        WebElement image = GetElement(productImage);
+        WebElement description = GetElement(productDescription);
+        WebElement price = GetElement(productPrice);
+        AssertTrue(title.isDisplayed());
+        AssertTrue(image.isDisplayed());
+        AssertTrue(description.isDisplayed());
+        AssertTrue(price.isDisplayed());
     }
 
     public void BackButtonTextValidation(){
-        WebElement backBtn = driver.findElement(productBackButton);
-        Assert.assertTrue(backBtn.isDisplayed());
-        Assert.assertEquals(backBtn.getText(), Constants.BACK_TO_PRODUCTS_BUTTON);
+        WebElement backBtn = GetElement(productBackButton);
+        AssertTrue(backBtn.isDisplayed());
+        AssertEquals(backBtn.getText(), Constants.BACK_TO_PRODUCTS_BUTTON);
     }
 
     public void ActionButtonTextValidation(){
-        WebElement actionButton = driver.findElement(productActionButton);
-        Assert.assertTrue(actionButton.isDisplayed());
+        WebElement actionButton = GetElement(productActionButton);
+        AssertTrue(actionButton.isDisplayed());
         if (actionButton.getText().equals(Constants.ADD_TO_CART_BUTTON)){
-            Assert.assertEquals(actionButton.getText(), Constants.ADD_TO_CART_BUTTON);
+            AssertEquals(actionButton.getText(), Constants.ADD_TO_CART_BUTTON);
         }else {
-            Assert.assertEquals(actionButton.getText(), Constants.REMOVE_TXT);
+            AssertEquals(actionButton.getText(), Constants.REMOVE_TXT);
         }
     }
 }

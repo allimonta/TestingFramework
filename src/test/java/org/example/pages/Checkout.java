@@ -18,48 +18,39 @@ public class Checkout extends BasePageObjects {
     }
 
     public void CheckoutScreenIsComplete() {
-        Assert.assertTrue(driver.findElement(screenTitle).isDisplayed(), "Checkout title is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(firstNameInput).isDisplayed(), "First Name input is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(lastNameInput).isDisplayed(), "Last Name input is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(postalCodeinput).isDisplayed(), "Postal code is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(cancelButton).isDisplayed(), "Cancel button is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(continueButton).isDisplayed(), "Continue button is not displayed in Checkout screen");
-        Assert.assertEquals(driver.findElement(screenTitle).getText(), Constants.CHECKOUT_TITLE_TXT);
-        Assert.assertEquals(driver.findElement(firstNameInput).getAttribute("placeholder"), Constants.FIRST_NAME_TXT);
-        Assert.assertEquals(driver.findElement(lastNameInput).getAttribute("placeholder"), Constants.LAST_NAME_TXT);
-        Assert.assertEquals(driver.findElement(postalCodeinput).getAttribute("placeholder"), Constants.ZIP_CODE_TXT);
-        Assert.assertEquals(driver.findElement(cancelButton).getText(), Constants.CANCEL_TXT);
-        Assert.assertEquals(driver.findElement(continueButton).getAttribute("value"), Constants.CONTINUE_TXT);
+        AssertTrue(GetElement(screenTitle).isDisplayed());
+        AssertTrue(GetElement(firstNameInput).isDisplayed());
+        AssertTrue(GetElement(lastNameInput).isDisplayed());
+        AssertTrue(GetElement(postalCodeinput).isDisplayed());
+        AssertTrue(GetElement(cancelButton).isDisplayed());
+        AssertTrue(GetElement(continueButton).isDisplayed());
+        AssertEquals(GetElement(screenTitle).getText(), Constants.CHECKOUT_TITLE_TXT);
+        AssertEquals(GetElement(firstNameInput).getAttribute("placeholder"), Constants.FIRST_NAME_TXT);
+        AssertEquals(GetElement(lastNameInput).getAttribute("placeholder"), Constants.LAST_NAME_TXT);
+        AssertEquals(GetElement(postalCodeinput).getAttribute("placeholder"), Constants.ZIP_CODE_TXT);
+        AssertEquals(GetElement(cancelButton).getText(), Constants.CANCEL_TXT);
+        AssertEquals(GetElement(continueButton).getAttribute("value"), Constants.CONTINUE_TXT);
     }
 
     public void ClickContinue() {
-        WebElement continueBtn = driver.findElement(continueButton);
-        Assert.assertTrue(continueBtn.isDisplayed());
-        continueBtn.click();
+        CLickElement(continueButton);
     }
 
     public void ErrorMessageDisplayed() {
-        WebElement error = driver.findElement(errorMessage);
-        Assert.assertTrue(error.isDisplayed(), "Error message is not displayed");
-        Assert.assertEquals(error.getText(), Constants.ERROR_FIRST_NAME_MSG);
+        WebElement error = GetElement(errorMessage);
+        AssertTrue(error.isDisplayed());
+        AssertEquals(error.getText(), Constants.ERROR_FIRST_NAME_MSG);
     }
 
     public void FieldsInErrorValidation() {
-        Assert.assertEquals(driver.findElement(firstNameInput).getAttribute("class"), Constants.ERROR_CLASS_NAME);
-        Assert.assertEquals(driver.findElement(lastNameInput).getAttribute("class"), Constants.ERROR_CLASS_NAME);
-        Assert.assertEquals(driver.findElement(postalCodeinput).getAttribute("class"), Constants.ERROR_CLASS_NAME);
-    }
-
-    public void EnterText(By element, String text) {
-        WebElement elementToText = driver.findElement(element);
-        Assert.assertTrue(elementToText.isDisplayed());
-        elementToText.sendKeys(text);
-        Assert.assertEquals(elementToText.getAttribute("value"), text);
+        AssertEquals(GetElement(firstNameInput).getAttribute("class"), Constants.ERROR_CLASS_NAME);
+        AssertEquals(GetElement(lastNameInput).getAttribute("class"), Constants.ERROR_CLASS_NAME);
+        AssertEquals(GetElement(postalCodeinput).getAttribute("class"), Constants.ERROR_CLASS_NAME);
     }
 
     public void EnterCheckoutValidInformation() {
-        EnterText(firstNameInput, Constants.FIRST_NAME);
-        EnterText(lastNameInput, Constants.LAST_NAME);
-        EnterText(postalCodeinput, Constants.ZIP_CODE);
+        TypeText(firstNameInput, Constants.FIRST_NAME);
+        TypeText(lastNameInput, Constants.LAST_NAME);
+        TypeText(postalCodeinput, Constants.ZIP_CODE);
     }
 }

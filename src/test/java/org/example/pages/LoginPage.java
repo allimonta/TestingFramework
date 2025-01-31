@@ -15,39 +15,21 @@ public class LoginPage extends BasePageObjects {
         super();
     }
 
-    public void enterUsername(String user) {
-        WebElement username = driver.findElement(usernameInp);
-        username.clear();
-        username.sendKeys(user);
-    }
-
-    public void enterPassword(String pass) {
-        WebElement password = driver.findElement(passwordInp);
-        password.clear();
-        password.sendKeys(pass);
-    }
-
-    public void clickLogin() {
-        WebElement loginButton = driver.findElement(loginBtn);
-        loginButton.click();
-    }
-
     public void verifyErrorMessage(String message) {
-        WebElement errorMessage = driver.findElement(errorMessageTxt);
-        Assert.assertTrue(errorMessage.isDisplayed());
-        Assert.assertEquals(errorMessage.getText(), message);
+        WebElement errorMessage = GetElement(errorMessageTxt);
+        AssertTrue(errorMessage.isDisplayed());
+        AssertEquals(errorMessage.getText(), message);
     }
 
-    public void LoginSuccessful(){
-        enterUsername(Constants.USERNAME);
-        enterPassword(Constants.PASSWORD);
-        clickLogin();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.INVENTORY_URL);
+    public void Login(String username, String password){
+        TypeText(usernameInp, username);
+        TypeText(passwordInp, password);
+        CLickElement(loginBtn);
     }
 
     public void LoginScreenIsCorrectlyDisplayed(){
-        Assert.assertTrue(driver.findElement(usernameInp).isDisplayed(), "Username input is not displayed in Login screen");
-        Assert.assertTrue(driver.findElement(passwordInp).isDisplayed(), "Password input is not displayed in Login screen");
-        Assert.assertTrue(driver.findElement(loginBtn).isDisplayed(), "Login button input is not displayed in Login screen");
+        AssertTrue(GetElement(usernameInp).isDisplayed());
+        AssertTrue(GetElement(passwordInp).isDisplayed());
+        AssertTrue(GetElement(loginBtn).isDisplayed());
     }
 }

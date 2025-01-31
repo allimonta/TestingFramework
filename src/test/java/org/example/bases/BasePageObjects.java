@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.lang.model.element.Element;
 import java.time.Duration;
 
 public class BasePageObjects {
@@ -32,32 +34,66 @@ public class BasePageObjects {
         return wait;
     }
 
+    public WebElement GetElement(By elementLocator){
+        return driver.findElement(elementLocator);
+    }
+
+    public void TypeText(By elementLocator, String text){
+        WebElement element = GetElement(elementLocator);
+        Assert.assertTrue(element.isDisplayed());
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    public void CLickElement(By elementLocator){
+        SmartWait(5).until(ExpectedConditions.visibilityOfElementLocated(elementLocator));
+        WebElement element = GetElement(elementLocator);
+        Assert.assertTrue(element.isDisplayed());
+        SmartWait(3).until(ExpectedConditions.elementToBeClickable(elementLocator));
+        element.click();
+    }
+
     public void ClickMenuBar() {
-        WebElement menuBarButton = driver.findElement(menuBar);
-        Assert.assertTrue(menuBarButton.isDisplayed());
-        menuBarButton.click();
+        CLickElement(menuBar);
+    }
+
+    public void AssertTrue(boolean validation){
+        Assert.assertTrue(validation, "Expected True but returned False");
+    }
+
+    public void AssertFalse(boolean validation){
+        Assert.assertFalse(validation, "Expected False but returned True");
+    }
+
+    public <T> void AssertEquals(T element1, T element2) {
+        Assert.assertEquals(element1, element2, "Expected elements to be equal, but they are different.");
+    }
+
+    public <T> void AssertNotEquals(T element1, T element2) {
+        Assert.assertNotEquals(element1, element2, "Expected elements to be equal, but they are different.");
+    }
+
+
+    public String GetURL(){
+        return driver.getCurrentUrl();
     }
 
     public void SelectOptionMenuBar(String option) {
         switch (option) {
             case "All Items":
-                WebElement allItemsLink = driver.findElement(optionAllItems);
-                allItemsLink.click();
-                Assert.assertEquals(driver.getCurrentUrl(), Constants.INVENTORY_URL);
+                CLickElement(optionAllItems);
+                AssertEquals(GetURL(), Constants.INVENTORY_URL);
                 break;
             case "About":
-                WebElement about = driver.findElement(optionAbout);
-                about.click();
-                Assert.assertEquals(driver.getCurrentUrl(), Constants.SAUCE_LABS_URL);
+                CLickElement(optionAbout);
+                AssertEquals(GetURL(), Constants.SAUCE_LABS_URL);
                 break;
             case "Logout":
-                WebElement logout = SmartWait(5).until(ExpectedConditions.elementToBeClickable(optionLogout));
-                logout.click();
-                Assert.assertEquals(driver.getCurrentUrl(), Constants.SAUCE_LABS_DEMO_URL);
+                CLickElement(optionLogout);
+                //AssertEquals(GetURL(), Constants.SAUCE_LABS_DEMO_URL);
                 break;
             case "Reset App State":
-                WebElement resetApp = driver.findElement(optionResetApp);
-                resetApp.click();
+                CLickElement(optionResetApp);
                 System.out.println("Reset App State is not working");
                 break;
             default:

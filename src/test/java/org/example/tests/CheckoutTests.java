@@ -27,7 +27,7 @@ public class CheckoutTests extends BaseTest {
         checkout = new Checkout();
         overview = new CheckoutOverview();
         complete = new CheckoutComplete();
-        loginPage.LoginSuccessful();
+        loginPage.Login(Constants.USERNAME, Constants.PASSWORD);
         inventoryPage.addProduct();
         inventoryPage.GoToCart();
         cart.GoToCheckout();
@@ -46,7 +46,7 @@ public class CheckoutTests extends BaseTest {
         checkout.CheckoutScreenIsComplete();
         checkout.EnterCheckoutValidInformation();
         checkout.ClickContinue();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.CHECKOUT_STEP_2_URL);
+        checkout.AssertEquals(checkout.GetURL(), Constants.CHECKOUT_STEP_2_URL);
         overview.CheckoutOverviewScreenIsComplete();
         overview.ComparingSumOfProductsAndItemsTotalLabel();
     }

@@ -11,34 +11,28 @@ public class LoginTest extends BaseTest {
     @Test
     public void LoginWrongPassword() {
         loginPage = new LoginPage();
-        loginPage.enterUsername(Constants.INVALID_USERNAME);
-        loginPage.enterPassword(Constants.INVALID_PASSWORD);
-        loginPage.clickLogin();
+        loginPage.Login(Constants.INVALID_USERNAME, Constants.INVALID_PASSWORD);
         loginPage.verifyErrorMessage(Constants.ERROR_USERNAME_AND_PASSWORD_MSG);
     }
 
     @Test
     public void LoginEmptyPassword() {
         loginPage = new LoginPage();
-        loginPage.enterUsername(Constants.EMPTY_TXT);
-        loginPage.enterPassword(Constants.EMPTY_TXT);
-        loginPage.clickLogin();
+        loginPage.Login(Constants.EMPTY_TXT, Constants.EMPTY_TXT);
         loginPage.verifyErrorMessage(Constants.ERROR_USERNAME_REQUIRED_MSG);
     }
 
     @Test
     public void CompleteLogin() {
         loginPage = new LoginPage();
-        loginPage.enterUsername(Constants.USERNAME);
-        loginPage.enterPassword(Constants.PASSWORD);
-        loginPage.clickLogin();
+        loginPage.Login(Constants.USERNAME, Constants.PASSWORD);
         Assert.assertEquals(driver.getCurrentUrl(), Constants.INVENTORY_URL);
     }
 
     @Test
     public void Logout(){
         loginPage = new LoginPage();
-        loginPage.LoginSuccessful();
+        loginPage.Login(Constants.USERNAME, Constants.PASSWORD);
         loginPage.ClickMenuBar();
         loginPage.SelectOptionMenuBar(Constants.LOGOUT_TXT);
         loginPage.LoginScreenIsCorrectlyDisplayed();

@@ -15,14 +15,14 @@ public class CheckoutComplete extends BasePageObjects {
     }
 
     public void CompleteScreenIsCorrectlyDisplayed(){
-        Assert.assertTrue(driver.findElement(screenTitle).isDisplayed(), "Checkout: Complete! title is not displayed in Complete screen");
-        Assert.assertTrue(driver.findElement(confirmImg).isDisplayed(), "Complete Image is not displayed in Complete screen");
-        Assert.assertTrue(driver.findElement(confirmSubTitle).isDisplayed(), "Subtitle is not displayed in Complete screen");
-        Assert.assertTrue(driver.findElement(confirmDescription).isDisplayed(), "Description is not displayed in Complete screen");
-        Assert.assertTrue(driver.findElement(backHomeButton).isDisplayed(), "Back home button is not displayed in Complete screen");
-        Assert.assertEquals(driver.findElement(screenTitle).getText(), Constants.CHECKOUT_COMPLETE_TITLE_TXT);
-        Assert.assertEquals(driver.findElement(confirmSubTitle).getText(), Constants.CHECKOUT_COMPLETE_SUBTITLE_TXT);
-        Assert.assertEquals(driver.findElement(confirmDescription).getText(), Constants.CHECKOUT_COMPLETE_DESCRIPTION_TXT);
-        Assert.assertEquals(driver.findElement(backHomeButton).getText(), Constants.BACK_HOME_BUTTON);
+        AssertTrue(GetElement(screenTitle).isDisplayed());
+        AssertTrue(GetElement(confirmImg).isDisplayed());
+        AssertTrue(GetElement(confirmSubTitle).isDisplayed());
+        AssertTrue(GetElement(confirmDescription).isDisplayed());
+        AssertTrue(GetElement(backHomeButton).isDisplayed());
+        AssertEquals(GetElement(screenTitle).getText(), Constants.CHECKOUT_COMPLETE_TITLE_TXT);
+        AssertEquals(GetElement(confirmSubTitle).getText(), Constants.CHECKOUT_COMPLETE_SUBTITLE_TXT);
+        AssertEquals(GetElement(confirmDescription).getText(), Constants.CHECKOUT_COMPLETE_DESCRIPTION_TXT);
+        AssertEquals(GetElement(backHomeButton).getText(), Constants.BACK_HOME_BUTTON);
     }
 }

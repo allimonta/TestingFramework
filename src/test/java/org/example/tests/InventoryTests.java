@@ -15,7 +15,7 @@ public class InventoryTests extends BaseTest {
     @BeforeMethod
     public void OpeningWeb() {
         loginPage = new LoginPage();
-        loginPage.LoginSuccessful();
+        loginPage.Login(Constants.USERNAME, Constants.PASSWORD);
         inventoryPage = new Inventory();
         product = new Product();
     }
@@ -54,7 +54,7 @@ public class InventoryTests extends BaseTest {
 
     @Test
     public void ImageLinkRedirectsToProductDetails(){
-        inventoryPage.ClickProductImage(Constants.ZERO);
+        inventoryPage.GoToProductDetails(Constants.ZERO, "Image");
         product.ProductDetailsScreenCompleteness();
         product.BackButtonTextValidation();
         product.ActionButtonTextValidation();
@@ -62,7 +62,7 @@ public class InventoryTests extends BaseTest {
 
     @Test
     public void TitleLinkRedirectsToProductDetails(){
-        inventoryPage.ClickProductTitle(Constants.ZERO);
+        inventoryPage.GoToProductDetails(Constants.ZERO, "Title");
         product.ProductDetailsScreenCompleteness();
         product.BackButtonTextValidation();
         product.ActionButtonTextValidation();

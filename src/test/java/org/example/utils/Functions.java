@@ -1,11 +1,8 @@
 package org.example.utils;
 
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-
 public class Functions {
 
-    public static int convertToNumber(String numberString){
+    public static int convertToNumber(String numberString) {
         return Integer.parseInt(numberString);
     }
 
@@ -14,4 +11,9 @@ public class Functions {
         return Double.parseDouble(number);
     }
 
+    public static double round(double number, int decimals) {
+        if (decimals < 0) throw new IllegalArgumentException("Decimals cannot be negative");
+        double scale = Math.pow(10, decimals);
+        return Math.round(number * scale) / scale;
+    }
 }

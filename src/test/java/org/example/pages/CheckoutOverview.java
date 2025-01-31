@@ -19,63 +19,53 @@ public class CheckoutOverview extends BasePageObjects {
     private By finishButton = By.id("finish");
     private By productsPrice = By.cssSelector(".inventory_item_price");
 
-
     public CheckoutOverview(){
         super();
     }
 
-    public void ClickFinish(){
-        WebElement finishBtn = driver.findElement(finishButton);
-        Assert.assertTrue(finishBtn.isDisplayed());
-        finishBtn.click();
-    }
-
     public void CheckoutOverviewScreenIsComplete(){
-        Assert.assertTrue(driver.findElement(screenTitle).isDisplayed(), "Checkout Overview title is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(paymentInformationLabel).isDisplayed(), "Payment Information label is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(paymentInformationValue).isDisplayed(), "Payment Information value is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(shippingInformationLabel).isDisplayed(), "Shipping Information label is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(shippingInformationValue).isDisplayed(), "Shipping Information value is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(priceTotalLabel).isDisplayed(), "Price Total label is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(itemTotalValue).isDisplayed(), "Item Total label is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(taxValue).isDisplayed(), "Tax label is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(totalvalue).isDisplayed(), "Total label is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(cancelButton).isDisplayed(), "Cancel button is not displayed in Checkout screen");
-        Assert.assertTrue(driver.findElement(finishButton).isDisplayed(), "Finish button is not displayed in Checkout screen");
-        Assert.assertEquals(driver.findElement(screenTitle).getText(), Constants.CHECKOUT_OVERVIEW_TITLE_TXT);
-        Assert.assertEquals(driver.findElement(paymentInformationLabel).getText(), Constants.PAYMENT_INFORMATION_TXT);
-        Assert.assertEquals(driver.findElement(paymentInformationValue).getText(), Constants.PAYMENT_INFORMATION_VALUE_TXT);
-        Assert.assertEquals(driver.findElement(shippingInformationLabel).getText(), Constants.SHIPPING_INFORMATION_TXT);
-        Assert.assertEquals(driver.findElement(shippingInformationValue).getText(), Constants.SHIPPING_INFORMATION_VALUE_TXT);
-        Assert.assertEquals(driver.findElement(priceTotalLabel).getText(), Constants.TOTAL_PRICE_TXT);
-        Assert.assertTrue(driver.findElement(itemTotalValue).getText().contains(Constants.ITEM_TOTAL_TXT));
-        Assert.assertTrue(driver.findElement(taxValue).getText().contains(Constants.TAX_TXT));
-        Assert.assertTrue(driver.findElement(totalvalue).getText().contains(Constants.TOTAL_TXT));
-        Assert.assertEquals(driver.findElement(cancelButton).getText(), Constants.CANCEL_TXT);
-        Assert.assertEquals(driver.findElement(finishButton).getText(), Constants.FINISH_BUTTON_TXT);
+        AssertTrue(GetElement(screenTitle).isDisplayed());
+        AssertTrue(GetElement(paymentInformationLabel).isDisplayed());
+        AssertTrue(GetElement(paymentInformationValue).isDisplayed());
+        AssertTrue(GetElement(shippingInformationLabel).isDisplayed());
+        AssertTrue(GetElement(shippingInformationValue).isDisplayed());
+        AssertTrue(GetElement(priceTotalLabel).isDisplayed());
+        AssertTrue(GetElement(itemTotalValue).isDisplayed());
+        AssertTrue(GetElement(taxValue).isDisplayed());
+        AssertTrue(GetElement(totalvalue).isDisplayed());
+        AssertTrue(GetElement(cancelButton).isDisplayed());
+        AssertTrue(GetElement(finishButton).isDisplayed());
+        AssertEquals(GetElement(screenTitle).getText(), Constants.CHECKOUT_OVERVIEW_TITLE_TXT);
+        AssertEquals(GetElement(paymentInformationLabel).getText(), Constants.PAYMENT_INFORMATION_TXT);
+        AssertEquals(GetElement(paymentInformationValue).getText(), Constants.PAYMENT_INFORMATION_VALUE_TXT);
+        AssertEquals(GetElement(shippingInformationLabel).getText(), Constants.SHIPPING_INFORMATION_TXT);
+        AssertEquals(GetElement(shippingInformationValue).getText(), Constants.SHIPPING_INFORMATION_VALUE_TXT);
+        AssertEquals(GetElement(priceTotalLabel).getText(), Constants.TOTAL_PRICE_TXT);
+        AssertTrue(GetElement(itemTotalValue).getText().contains(Constants.ITEM_TOTAL_TXT));
+        AssertTrue(GetElement(taxValue).getText().contains(Constants.TAX_TXT));
+        AssertTrue(GetElement(totalvalue).getText().contains(Constants.TOTAL_TXT));
+        AssertEquals(GetElement(cancelButton).getText(), Constants.CANCEL_TXT);
+        AssertEquals(GetElement(finishButton).getText(), Constants.FINISH_BUTTON_TXT);
     }
 
     public double calculatingTotalPrice() {
         double totalPrice = 0;
-        WebElement product = driver.findElement(productsPrice);
+        WebElement product = GetElement(productsPrice);
         String priceText = product.getText();
         double price = Functions.extractNumber(priceText);
         totalPrice += price;
-        totalPrice = Math.round(totalPrice * 100.0) / 100.0;
-        return totalPrice;
+        return Functions.round(totalPrice, 2);
     }
 
     public void ComparingSumOfProductsAndItemsTotalLabel(){
         double productsSumTotalPrice = calculatingTotalPrice();
-        WebElement itemTotal = driver.findElement(itemTotalValue);
+        WebElement itemTotal = GetElement(itemTotalValue);
         double totalClean = Functions.extractNumber(itemTotal.getText());
-        Assert.assertEquals(productsSumTotalPrice, totalClean);
+        AssertEquals(productsSumTotalPrice, totalClean);
     }
 
     public void GoToComplete(){
-        WebElement finish = driver.findElement(finishButton);
-        Assert.assertTrue(finish.isDisplayed());
-        finish.click();
-        Assert.assertEquals(driver.getCurrentUrl(), Constants.CHECKOUT_COMPLETE_URL);
+        CLickElement(finishButton);
+        AssertEquals(GetURL(), Constants.CHECKOUT_COMPLETE_URL);
     }
 }

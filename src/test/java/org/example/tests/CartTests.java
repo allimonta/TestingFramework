@@ -3,6 +3,7 @@ import org.example.bases.BaseTest;
 import org.example.pages.CartPage;
 import org.example.pages.Inventory;
 import org.example.pages.LoginPage;
+import org.example.utils.Constants;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -18,7 +19,7 @@ public class CartTests extends BaseTest {
     @BeforeMethod
     public void GoToCart() {
         loginPage = new LoginPage();
-        loginPage.LoginSuccessful();
+        loginPage.Login(Constants.USERNAME, Constants.PASSWORD);
         inventoryPage = new Inventory();
         cart = new CartPage();
     }
