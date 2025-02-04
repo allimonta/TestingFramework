@@ -19,6 +19,16 @@ public class MongoConnectionTests {
 
     @Test
     public void PrintingDocuments() {
-        //dbConnection.readDocuments("movies", 5);
+        dbConnection.readDocuments("movies", 10);
+    }
+
+    @Test
+    public void GetLastDocumentAdded() {
+        dbConnection.getLastAddedDocument("movies");
+    }
+
+    @Test
+    public void GetAllTitles() {
+        dbConnection.getListOfAttributeValues("movies", "title", 5);
     }
 }

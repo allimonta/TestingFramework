@@ -90,7 +90,7 @@ public class BasePageObjects {
                 break;
             case "Logout":
                 CLickElement(optionLogout);
-                //AssertEquals(GetURL(), Constants.SAUCE_LABS_DEMO_URL);
+                AssertEquals(GetURL(), Constants.SAUCE_LABS_DEMO_URL);
                 break;
             case "Reset App State":
                 CLickElement(optionResetApp);
